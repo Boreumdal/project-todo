@@ -141,7 +141,7 @@ label {
     margin-top: 20px;
     height: 47vh;
     display: grid;
-    grid-template-rows: auto auto;
+    grid-template-rows: auto 90%;
 }
 
 .todo-semi-container2 p.item-container-heading {
@@ -191,6 +191,7 @@ span.name {
     overflow-y: auto;
     display: flex;
     flex-direction: column;
+    justify-content: start;
     gap: 10px;
     padding-right: 4px;
 }
