@@ -135,18 +135,28 @@ label {
     background-color: #171010;
     color: white;
     height: fit-content;
-    padding: 2rem 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    padding: 2rem 1.8rem;
     border-radius: 8px;
     box-shadow: 0px 5px 17px rgba(0, 0, 0, 0.545);
     margin-top: 20px;
+    height: 47vh;
+    display: grid;
+    grid-template-rows: auto auto;
+}
+
+.todo-semi-container2 p.item-container-heading {
+    align-self: start;
+    padding-bottom: 10px;
+    font-weight: 700;
+}
+
+span.name {
+    color: #EEB76B;
 }
 
 #todo {
     width: 85%;
+    margin-top: 20px;
 }
 
 .todo-form {
@@ -156,12 +166,48 @@ label {
 }
 
 .task-item {
-    border: 1px solid white;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.493);
+    background-color: #362222;
+    border-radius: 4px;
     width: 100%;
+    padding: 0.4rem 10px;
+    display: grid;
+    grid-template-columns: 87% auto;
+    gap: 7px;
 }
 
+.task-item p {
+    display: flex;
+    align-items: center;
+}
+.task-item button {
+    aspect-ratio: 1;
+    background-color: rgb(211, 39, 39);
+    color: white;
+    border-color: transparent;
+}
 
+.item-container-body {
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-right: 4px;
+}
 
+.item-container-body::-webkit-scrollbar {
+    appearance: none;
+    width: 6px;
+}
+
+.item-container-body::-webkit-scrollbar-thumb {
+    background-color: #EEB76B;
+    border-radius: 4px;
+}
+
+.todo-subheader {
+    padding: 10px 0;
+}
 
 
 .border {
