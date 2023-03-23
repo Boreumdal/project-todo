@@ -1,12 +1,9 @@
 let username
 
-
 // Utility Functions
 const upperCaseFirst = str => {
     return `${str[0].toUpperCase()}${str.slice(1)}`
 }
-
-// todo object consist of ID: Date.now() and Task: Task title
 
 const getTodos = () => {
     return JSON.parse(localStorage.getItem('ArellanoMelvinTodoList'))
@@ -37,11 +34,14 @@ const displayTodos = arr => {
         p.textContent = todo.task
 
         // Set properties to button
-        button.textContent = 'Del'
-        button.addEventListener('click', () => {deleteTodo(todo.id)})
+        button.textContent = '✖'
+        button.addEventListener('click', () => {
+            deleteTodo(todo.id)
+        })
 
         // Set class to task_item and append to task_item container
-        task_item.className = 'task-item'
+        task_item.addEventListener('dblclick', () => { doneTodo(todo.id) })
+        task_item.className = `task-item ${todo.done ? 'disabled-item' : ''}`
         task_item.append(p, button)
 
         // Append to item_container_body
@@ -53,17 +53,30 @@ const displayTodos = arr => {
 
 const checkNoTodo = () => {
     if (getTodos().length === 0){
-        let existing = document.querySelector('div.item-container-body')
+        let container = document.querySelector('div.item-container-body')
 
         let no_todo = document.createElement('p')
-        no_todo.textContent = 'No task todo.'
+        no_todo.className = 'no-todo'
+        no_todo.textContent = 'Nice! No task todo'
 
-        existing.append(no_todo)
+        container.append(no_todo)
     }
 }
 
 const deleteTodo = id => {
     localStorage.setItem('ArellanoMelvinTodoList', JSON.stringify(getTodos().filter(todo => todo.id !== id)))
+    displayTodos(getTodos())
+    checkNoTodo()
+}
+
+const doneTodo = id => {
+    let todos = JSON.parse(localStorage.getItem('ArellanoMelvinTodoList'))
+
+    let todoIndex = todos.findIndex(todo => todo.id === id)
+    todos[todoIndex].done = true
+    console.log(todos)
+
+    localStorage.setItem('ArellanoMelvinTodoList', JSON.stringify(todos))
     displayTodos(getTodos())
     checkNoTodo()
 }
@@ -108,6 +121,13 @@ let todo_input = document.querySelector('input#todo-input')
 displayTodos(getTodos())
 checkNoTodo()
 
+let logout = document.querySelector('.todo-logout')
+
+logout.addEventListener('click', () => {
+    username = ''
+    login_container.style.display = ''
+    todo_container.style.display = 'none'
+})
 
 todo_form.addEventListener('submit', e => {
     e.preventDefault()
@@ -118,7 +138,8 @@ todo_form.addEventListener('submit', e => {
 
     let todo_object = {
         id: Date.now(),
-        task: upperCaseFirst(todo_input.value)
+        task: upperCaseFirst(todo_input.value),
+        done: false
     }
 
     addTodo(todo_object)
