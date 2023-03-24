@@ -22,7 +22,7 @@ main {
 }
 
 h1, h2 {
-    font-family: 'Raleway';
+    font-family: 'Raleway', sans-serif;
 }
 
 input[type='text'] {
@@ -34,6 +34,12 @@ input[type='text'] {
 
 button {
     cursor: pointer;
+}
+
+label {
+    font-weight: 700;
+    padding: 8px 0;
+    display: block;
 }
 
 .utility-button {
@@ -53,6 +59,17 @@ button {
     background-color: #ffffffb5;
 }
 
+.divider {
+    background-color: #EEB76B;
+    border-radius: 10px;
+    width: 110px;
+    height: 4px;
+    margin: 10px 0;
+}
+
+/* LOGIN PAGE */
+
+/* Login container */
 .login-container {
     position: absolute;
     top: 50%;
@@ -71,19 +88,12 @@ button {
     box-shadow: 0px 5px 17px rgba(0, 0, 0, 0.545);
 }
 
-.divider {
-    background-color: #EEB76B;
-    border-radius: 10px;
-    width: 110px;
-    height: 4px;
-    margin: 10px 0;
-}
-
 .login-container h1 {
     text-align: center;
     color: #EEB76B;
 }
 
+/* Login Heading */
 .login-heading {
     width: 90%;
     margin: 0 auto 18px;
@@ -99,6 +109,19 @@ button {
     margin-top: 4px;
 }
 
+.login-heading a {
+    text-decoration: none;
+    color: #EEB76B;
+    transition: ease-in-out 0.4s;
+    border-radius: 5px;
+}
+
+.login-heading a:hover {
+    color: #171010;
+    background-color: #EEB76B;
+}
+
+/* Login Body */
 .login-content {
     width: 70%;
     margin: 18px auto 0;
@@ -110,12 +133,9 @@ button {
     margin-bottom: 1.3rem;
 }
 
-label {
-    font-weight: 700;
-    padding: 8px 0;
-    display: block;
-}
+/* TODO PAGE */
 
+/* Todo container */
 .todo-container {
     position: absolute;
     top: 50%;
@@ -128,6 +148,15 @@ label {
     position: relative;
 }
 
+.name {
+    color: #EEB76B;
+}
+
+.todo-subheader {
+    padding: 10px 0;
+}
+
+/* Menu Hamburger Button */
 .action-button {
     position: absolute;
     top: 6px;
@@ -149,6 +178,7 @@ label {
     opacity: 0.7;
 }
 
+/* Menu Hamburger Body */
 .action-body {
     position: absolute;
     top: 6px;
@@ -170,6 +200,7 @@ label {
     opacity: 0.4;
 }
 
+/* Meu Hamburger Button: CLEAR */
 .todo-clear {
     margin-top: 41px;
     padding: 5px;
@@ -189,6 +220,7 @@ label {
     transition: 0.3s;
 }
 
+/* Meu Hamburger Button: LOGOUT */
 .todo-logout {
     margin-top: 2px;
     border: none;
@@ -212,6 +244,7 @@ label {
     object-fit: contain;
 }
 
+/* Todo Header */
 .todo-semi-container {
     background-color: #171010;
     color: white;
@@ -226,6 +259,17 @@ label {
     margin-top: 20px;
 }
 
+form#todo {
+    width: 85%;
+}
+
+.todo-form {
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: 80% 19%;
+}
+
+/* Todo Body */
 .todo-semi-container2 {
     background-color: #171010;
     color: white;
@@ -238,6 +282,7 @@ label {
     grid-template-rows: 7% 86% 7%;
 }
 
+/* Todo Body Header */
 .item-container-head {
     display: flex;
     justify-content: space-between;
@@ -264,10 +309,71 @@ p.item-container-hint svg {
     height: 15px;
 }
 
+/* Todo Body Body */
 .item-container {
     margin: 9px 0;
 }
 
+/* Main section for Todos */
+.item-container-body {
+    overflow-y: auto;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    gap: 10px;
+    padding-right: 4px;
+}
+
+.item-container-body::-webkit-scrollbar {
+    appearance: none;
+    width: 6px;
+}
+
+.item-container-body::-webkit-scrollbar-thumb {
+    background-color: #EEB76B;
+    border-radius: 4px;
+}
+
+/* Todo Item */
+.task-item {
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.493);
+    background-color: #362222;
+    border-radius: 4px;
+    width: 100%;
+    padding: 0.8rem 10px;
+    display: grid;
+    grid-template-columns: 87% auto;
+    gap: 7px;
+    border-left: 4px solid #EEB76B;
+}
+
+.task-item p {
+    display: flex;
+    align-items: center;
+}
+
+.task-item button {
+    aspect-ratio: 1;
+    background-color: rgb(211, 39, 39);
+    color: white;
+    border-color: transparent;
+    font-size: 0.7rem;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-self: end;
+    border-radius: 4px;
+}
+
+.task-item button:hover {
+    background-color: rgb(186, 34, 34);
+    transition: 0.3s;
+}
+
+/* Todo Body Footer */
 .item-container-footer p, .item-container-footer a {
     align-self: start;
     font-weight: 700;
@@ -275,10 +381,6 @@ p.item-container-hint svg {
     text-decoration: none;
     color: white;
     transition: 0.3s;
-}
-
-.item-container-footer a:hover {
-    color: rgb(60, 123, 240);
 }
 
 .item-container-footer {
@@ -305,89 +407,29 @@ p.item-container-hint svg {
     transition: 0.3s;
 }
 
-.item-container-footer a:hover svg {
-    fill: rgb(60, 123, 240);
+.item-container-footer a.github:hover svg, .item-container-footer a.github:hover {
+    fill: #6cc644;
+    color: #6cc644;
 }
 
-span.name {
-    color: #EEB76B;
+.item-container-footer a.fb:hover svg, .item-container-footer a.fb:hover {
+    fill: #4267b2;
+    color: #4267b2;
 }
 
-#todo {
-    width: 85%;
+.item-container-footer a.git:hover svg, .item-container-footer a.git:hover {
+    fill: #c9510c;
+    color: #c9510c;
 }
 
-.todo-form {
-    display: grid;
-    justify-content: space-between;
-    grid-template-columns: 80% 19%;
-}
 
-.task-item {
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.493);
-    background-color: #362222;
-    border-radius: 4px;
-    width: 100%;
-    padding: 0.8rem 10px;
-    display: grid;
-    grid-template-columns: 87% auto;
-    gap: 7px;
-    border-left: 4px solid #EEB76B;
-}
-
-.task-item p {
-    display: flex;
-    align-items: center;
-}
-.task-item button {
-    aspect-ratio: 1;
-    background-color: rgb(211, 39, 39);
-    color: white;
-    border-color: transparent;
-    font-size: 0.7rem;
-    width: 24px;
-    height: 24px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    justify-self: end;
-    border-radius: 4px;
-}
-
-.task-item button:hover {
-    background-color: rgb(186, 34, 34);
-    transition: 0.3s;
-}
-
-.item-container-body {
-    overflow-y: auto;
-    max-height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    gap: 10px;
-    padding-right: 4px;
-}
-
-.item-container-body::-webkit-scrollbar {
-    appearance: none;
-    width: 6px;
-}
-
-.item-container-body::-webkit-scrollbar-thumb {
-    background-color: #EEB76B;
-    border-radius: 4px;
-}
-
-.todo-subheader {
-    padding: 10px 0;
-}
-
+/* No todo found */
 .no-todo {
     color: #EEB76B;
     font-weight: 900;
 }
 
+/* Completed task */
 .disabled-item {
     filter: brightness(0.4);
     pointer-events: none;
