@@ -1,5 +1,13 @@
-let username
-let toggle = 0
+// Name:    Melvin Arellano
+// From:    Rizal
+// Title:   TodoList - Bayan Academy Final Project
+
+// VARIABLES
+
+// Global variables
+let username, toggle = 0
+
+// FUNCTIONS DECLARATION
 
 // Utility Functions
 const upperCaseFirst = str => `${str[0].toUpperCase()}${str.slice(1)}`
@@ -33,15 +41,13 @@ const displayTodos = arr => {
 
         // Set text to the p tag
         p.textContent = todo.task
+        p.addEventListener('dblclick', () => doneTodo(todo.id))
 
         // Set properties to button
         button.textContent = '✖'
-        button.addEventListener('click', () => {
-            deleteTodo(todo.id)
-        })
+        button.addEventListener('click', () => deleteTodo(todo.id))
 
         // Set class to task_item and append to task_item container
-        task_item.addEventListener('dblclick', () => { doneTodo(todo.id) })
         task_item.className = `task-item ${todo.done ? 'disabled-item' : ''}`
         task_item.append(p, button)
 
@@ -66,51 +72,65 @@ const checkNoTodo = arr => {
     }
 }
 
+// Redisplays todo data
 const resetDisplay = arr => {
     displayTodos(arr)
     checkNoTodo(arr)
 }
 
+// Deletes todo
 const deleteTodo = id => {
     localStorage.setItem('ArellanoMelvinTodoList', JSON.stringify(getTodos().filter(todo => todo.id !== id)))
     resetDisplay(getTodos())
 }
 
+// Modify todo's status to done
 const doneTodo = id => {
     let todos = JSON.parse(localStorage.getItem('ArellanoMelvinTodoList'))
 
+    // Looks for the index of todo with ID of ID in parameters
     let todoIndex = todos.findIndex(todo => todo.id === id)
+
+    // Directly mutate the todos array then set to storage again
     todos[todoIndex].done = true
-    console.log(todos)
 
     localStorage.setItem('ArellanoMelvinTodoList', JSON.stringify(todos))
-    displayTodos(getTodos())
-    checkNoTodo(getTodos())
+    resetDisplay(getTodos())
 }
+
+// INITIALIZATION
 
 // Checks if localstorage is present, sets new storage if not
 if (!getTodos()){
     localStorage.setItem('ArellanoMelvinTodoList', '[]')
 }
 
+// Checks username variable, if equals to none, hide to Main Page
 let todo_container = document.querySelector('.todo-container')
-
 if (!username){
-    todo_container.style.display = 'none' 
+    todo_container.style.display = 'none'
 }
 
-let login_container = document.querySelector('.login-container') // login container
+resetDisplay(getTodos())
+
+// LOGICS
+
+// Login Page Login
+let login_container = document.querySelector('.login-container')
 let login_input = document.querySelector('#login-input')
 
 login.addEventListener('submit', e => {
     e.preventDefault()
 
+    // If login input is equalss to none, alert the user
     if (login_input.value === ''){
         return alert('Enter your name before proceeding.')
     }
 
+    // If login input is filled, continue. Sets the login input value to the variable username
     username = login_input.value
 
+    // If username exists, display the Main Page and hide the Login Page
     if (username){
         login_container.style.display = 'none'
         todo_container.style.display = '' 
@@ -121,12 +141,9 @@ login.addEventListener('submit', e => {
     }
 })
 
+// Todo Page Logic
 let todo_form = document.querySelector('form#todo')
-
 let todo_input = document.querySelector('input#todo-input')
-
-displayTodos(getTodos())
-checkNoTodo(getTodos())
 
 let menu = document.querySelector('.action-button')
 
@@ -160,8 +177,7 @@ clearer.addEventListener('dblclick', () => {
 
     alert('Todos has been cleared')
 
-    displayTodos(getTodos())
-    checkNoTodo(getTodos())
+    resetDisplay(getTodos())
 })
 
 todo_form.addEventListener('submit', e => {
