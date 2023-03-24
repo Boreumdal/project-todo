@@ -2,13 +2,10 @@ let username
 let toggle = 0
 
 // Utility Functions
-const upperCaseFirst = str => {
-    return `${str[0].toUpperCase()}${str.slice(1)}`
-}
+const upperCaseFirst = str => `${str[0].toUpperCase()}${str.slice(1)}`
 
-const getTodos = () => {
-    return JSON.parse(localStorage.getItem('ArellanoMelvinTodoList'))
-}
+// Action Functions
+const getTodos = () => JSON.parse(localStorage.getItem('ArellanoMelvinTodoList'))
 
 const addTodo = todo => {
     localStorage.setItem('ArellanoMelvinTodoList', JSON.stringify([...getTodos(), todo]))
@@ -16,15 +13,18 @@ const addTodo = todo => {
 
 const displayTodos = arr => {
 
+    // Check if container with class of "item-container-body" exists.
+    // If yes, then remove it to avoid duplication of result
     let existing = document.querySelector('div.item-container-body')
-
     if (existing){
         existing.remove()
     }
     
+    // Creates div element with class of "item-container-body"
     let item_container_body = document.createElement('div')
     item_container_body.className = 'item-container-body'
     
+    // Maps through todo array and appends the todos to the container above
     arr.forEach(todo => {
         let task_item = document.createElement('div')
 
@@ -49,11 +49,13 @@ const displayTodos = arr => {
         item_container_body.appendChild(task_item)
     })
 
+    // Append the container with class of "item-container-body" to previously deleted container with same class, then display the data
     document.querySelector('.item-container').append(item_container_body)
 }
 
-const checkNoTodo = () => {
-    if (getTodos().length === 0){
+const checkNoTodo = arr => {
+    // If todo arr length is 0, display the text
+    if (arr.length === 0){
         let container = document.querySelector('div.item-container-body')
 
         let no_todo = document.createElement('p')
@@ -64,10 +66,14 @@ const checkNoTodo = () => {
     }
 }
 
+const resetDisplay = arr => {
+    displayTodos(arr)
+    checkNoTodo(arr)
+}
+
 const deleteTodo = id => {
     localStorage.setItem('ArellanoMelvinTodoList', JSON.stringify(getTodos().filter(todo => todo.id !== id)))
-    displayTodos(getTodos())
-    checkNoTodo()
+    resetDisplay(getTodos())
 }
 
 const doneTodo = id => {
@@ -79,7 +85,7 @@ const doneTodo = id => {
 
     localStorage.setItem('ArellanoMelvinTodoList', JSON.stringify(todos))
     displayTodos(getTodos())
-    checkNoTodo()
+    checkNoTodo(getTodos())
 }
 
 // Checks if localstorage is present, sets new storage if not
@@ -99,6 +105,10 @@ let login_input = document.querySelector('#login-input')
 login.addEventListener('submit', e => {
     e.preventDefault()
 
+    if (login_input.value === ''){
+        return alert('Enter your name before proceeding.')
+    }
+
     username = login_input.value
 
     if (username){
@@ -116,7 +126,7 @@ let todo_form = document.querySelector('form#todo')
 let todo_input = document.querySelector('input#todo-input')
 
 displayTodos(getTodos())
-checkNoTodo()
+checkNoTodo(getTodos())
 
 let menu = document.querySelector('.action-button')
 
@@ -135,7 +145,6 @@ menu.addEventListener('click', () => {
     }
 })
 
-
 let logout = document.querySelector('.todo-logout')
 let clearer = document.querySelector('.todo-clear')
 
@@ -152,7 +161,7 @@ clearer.addEventListener('dblclick', () => {
     alert('Todos has been cleared')
 
     displayTodos(getTodos())
-    checkNoTodo()
+    checkNoTodo(getTodos())
 })
 
 todo_form.addEventListener('submit', e => {
