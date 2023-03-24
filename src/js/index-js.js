@@ -142,11 +142,11 @@ login.addEventListener('submit', e => {
 })
 
 // Todo Page Logic
-let todo_form = document.querySelector('form#todo')
-let todo_input = document.querySelector('input#todo-input')
 
+// Hamburger toggle for Clear Todos and Logout buttons
 let menu = document.querySelector('.action-button')
 
+// Hamburger functionailty for toggling
 menu.addEventListener('click', () => {
     let toggle_button_img = document.querySelector('.action-button-img')
     let toggle_body = document.querySelector('.action-body')
@@ -162,6 +162,7 @@ menu.addEventListener('click', () => {
     }
 })
 
+// Menu Button Functionalities
 let logout = document.querySelector('.todo-logout')
 let clearer = document.querySelector('.todo-clear')
 
@@ -180,6 +181,10 @@ clearer.addEventListener('dblclick', () => {
     resetDisplay(getTodos())
 })
 
+// Add Todo Form Functionality
+let todo_form = document.querySelector('form#todo')
+let todo_input = document.querySelector('input#todo-input')
+
 todo_form.addEventListener('submit', e => {
     e.preventDefault()
 
@@ -187,17 +192,20 @@ todo_form.addEventListener('submit', e => {
         return alert('Fill the task input field before submitting.')
     }
 
+    // Creates an object with values of id: Date.now(), task: From todo_input value and done: Status of the task.
     let todo_object = {
         id: Date.now(),
         task: upperCaseFirst(todo_input.value),
         done: false
     }
 
+    // Calls addTodo function passing the object created
     addTodo(todo_object)
 
     if (getTodos().length > 0){
         displayTodos(getTodos())
     }
 
+    // Reset the todo input
     todo_input.value = ''
 })
