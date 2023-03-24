@@ -1,4 +1,5 @@
 let username
+let toggle = 0
 
 // Utility Functions
 const upperCaseFirst = str => {
@@ -48,7 +49,7 @@ const displayTodos = arr => {
         item_container_body.appendChild(task_item)
     })
 
-    document.querySelector('.todo-semi-container2').append(item_container_body)
+    document.querySelector('.item-container').append(item_container_body)
 }
 
 const checkNoTodo = () => {
@@ -81,14 +82,10 @@ const doneTodo = id => {
     checkNoTodo()
 }
 
-
-
-
 // Checks if localstorage is present, sets new storage if not
 if (!getTodos()){
     localStorage.setItem('ArellanoMelvinTodoList', '[]')
 }
-
 
 let todo_container = document.querySelector('.todo-container')
 
@@ -121,12 +118,41 @@ let todo_input = document.querySelector('input#todo-input')
 displayTodos(getTodos())
 checkNoTodo()
 
-let logout = document.querySelector('.todo-logout')
+let menu = document.querySelector('.action-button')
 
-logout.addEventListener('click', () => {
+menu.addEventListener('click', () => {
+    let toggle_button_img = document.querySelector('.action-button-img')
+    let toggle_body = document.querySelector('.action-body')
+
+    if (toggle === 0){
+        toggle_body.style.display = 'flex'
+        toggle_button_img.src = 'src/img/close-icon.svg'
+        toggle++
+    } else {
+        toggle_body.style.display = 'none'
+        toggle_button_img.src = 'src/img/menu-icon.svg'
+        toggle--
+    }
+})
+
+
+let logout = document.querySelector('.todo-logout')
+let clearer = document.querySelector('.todo-clear')
+
+logout.addEventListener('dblclick', () => {
     username = ''
+    toggle = 0
     login_container.style.display = ''
     todo_container.style.display = 'none'
+})
+
+clearer.addEventListener('dblclick', () => {
+    localStorage.setItem('ArellanoMelvinTodoList', '[]')
+
+    alert('Todos has been cleared')
+
+    displayTodos(getTodos())
+    checkNoTodo()
 })
 
 todo_form.addEventListener('submit', e => {
