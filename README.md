@@ -9,6 +9,7 @@ This simple project includes:
 * Delete the task by clicking the [x] button
 * Drop down menu for logging out and clearing all the tasks
 * Simple footer
+* Mobile-first Design
 
 ### Login
 ![login](./md/b.png)
