@@ -1,4 +1,8 @@
-# TODO List Project for Training
+# TODO List Project
 Project for JavaScript Training from Bayan Academy
 
-![plot](./md/1.png)
+###Login
+![login](./md/b.png)
+
+###Home
+![home](./md/a.png)
