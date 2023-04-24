@@ -3,12 +3,12 @@ Project for JavaScript Training from Bayan Academy. This project was made with p
 
 ## Features
 This simple project includes:
-*Login page where the user can enter their name to be displayed in home page
-*Todo tasks are save in localhost
-*Double click to mark as done
-*Delete the task by clicking the [x] button
-*Drop down menu for logging out and clearing all the tasks
-*Simple footer
+* Login page where the user can enter their name to be displayed in home page
+* Todo tasks are save in localhost
+* Double click to mark as done
+* Delete the task by clicking the [x] button
+* Drop down menu for logging out and clearing all the tasks
+* Simple footer
 
 ### Login
 ![login](./md/b.png)
